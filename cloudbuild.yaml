@@ -1,19 +1,20 @@
 options:
   logging: CLOUD_LOGGING_ONLY
+
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-prediction-sahithi', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-prediction-sahithi/ml-sales-prediction-sahithi:latest', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-prediction-sahithi']
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-prediction-sahithi/ml-sales-prediction-sahithi:latest']
 
   - name: 'us-central1-docker.pkg.dev/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args: ['run', 'deploy', 'ml-sales-prediction-sahithi',
-           '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-prediction-sahithi',
+           '--image', 'us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-prediction-sahithi/ml-sales-prediction-sahithi:latest',
            '--platform', 'managed',
            '--region', 'us-central1',
            '--allow-unauthenticated']
 
 images:
-  - us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-prediction-sahithi
+  - us-central1-docker.pkg.dev/$PROJECT_ID/ml-sales-prediction-sahithi/ml-sales-prediction-sahithi:latest
