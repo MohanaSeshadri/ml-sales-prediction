@@ -2,18 +2,18 @@ options:
   logging: CLOUD_LOGGING_ONLY
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/ml-sales-prediction', '.']
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/ml-sales-prediction-sahithi', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/ml-sales-prediction']
+    args: ['push', 'gcr.io/$PROJECT_ID/ml-sales-prediction-sahithi']
 
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
-    args: ['run', 'deploy', 'ml-sales-prediction',
-           '--image', 'gcr.io/$PROJECT_ID/ml-sales-prediction',
+    args: ['run', 'deploy', 'ml-sales-prediction-sahithi',
+           '--image', 'gcr.io/$PROJECT_ID/ml-sales-prediction-sahithi',
            '--platform', 'managed',
            '--region', 'us-central1',
            '--allow-unauthenticated']
 
 images:
-  - gcr.io/$PROJECT_ID/ml-sales-prediction
+  - gcr.io/$PROJECT_ID/ml-sales-prediction-sahithi
